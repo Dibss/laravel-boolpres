@@ -1,6 +1,8 @@
 <template>
   <div>
+
     <LoaderComp v-if="isLoading"/>
+
     <ul v-if="posts.length">
       <li v-for="post in posts" :key="post.id">
         <div class="card">
@@ -15,21 +17,27 @@
       </li>
     </ul> 
     <p v-else>Non ci sono post</p>
+    
+    <PaginationComp :pagination="pagination"/>
+
   </div>
 </template> 
 
 <script>
 import axios from 'axios';
 import LoaderComp from '../../LoaderComp.vue';
+import PaginationComp from '../../PaginationComp.vue';
 
 export default{
   name: "PostListComp",
   components: {
     LoaderComp,
-  },
+    PaginationComp,
+},
   data(){
     return{
       posts: [],
+      pagination: {},
       isLoading: true,
     }
   },
@@ -38,7 +46,15 @@ export default{
       axios.get('http://127.0.0.1:8000/api/posts')
           .then((res) => {
             console.log(res.data);
-            this.posts = res.data.posts;
+
+            const {data, current_page, last_page} = res.data.posts;
+
+            this.posts = data;
+            this.pagination = {
+              lastPage: last_page,
+              currentPage: current_page,
+            }
+
           }).then(()=>{
             this.isLoading = false;
           })
