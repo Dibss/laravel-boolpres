@@ -9,7 +9,7 @@
           <h2>{{post.title}}</h2>
           <span>Category: {{post.category.label}}</span> 
           <div>
-            <button><router-link :to="{name: 'postDetail', params: {id: post.id}}">Details</router-link></button>
+            <button><router-link :to="{name: 'postDetail', params: {slug: post.slug}}">Details</router-link></button>
           </div>
           <p>{{post.description}}</p>
           <div v-if="post.tags.length > 0">Tags: 

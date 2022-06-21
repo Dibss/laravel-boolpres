@@ -2092,7 +2092,7 @@ __webpack_require__.r(__webpack_exports__);
     getPost: function getPost() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/posts/".concat(this.$route.params.id)).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/posts/".concat(this.$route.params.slug)).then(function (res) {
         console.log(res.data); // const {data} = res.data.posts;
 
         _this.post = res.data;
@@ -3877,7 +3877,7 @@ var render = function () {
                             attrs: {
                               to: {
                                 name: "postDetail",
-                                params: { id: post.id },
+                                params: { slug: post.slug },
                               },
                             },
                           },
@@ -20082,7 +20082,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_ContactPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     name: 'contact'
   }, {
-    path: '/posts/:id',
+    path: '/posts/:slug',
     component: _components_pages_PostDetailPage_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'postDetail'
   }, {

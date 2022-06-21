@@ -15,7 +15,7 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: HomePage, name: 'home' },
     { path: '/contacts', component: ContactPage, name: 'contact' },
-    { path: '/posts/:id', component: PostDetailPage, name: 'postDetail' },
+    { path: '/posts/:slug', component: PostDetailPage, name: 'postDetail' },
     { path: '*', component: NotFoundPage, name: 'notFound' },
   ]
 });

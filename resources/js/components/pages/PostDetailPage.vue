@@ -22,7 +22,7 @@ export default{
   },
   methods: {
     getPost(){
-      axios.get(`http://127.0.0.1:8000/api/posts/${this.$route.params.id}`)
+      axios.get(`http://127.0.0.1:8000/api/posts/${this.$route.params.slug}`)
           .then((res) => {
             console.log(res.data);
 
