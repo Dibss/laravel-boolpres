@@ -21,7 +21,7 @@
     </ul> 
     <p v-else>Non ci sono post</p>
     
-    <PaginationComp :pagination="pagination"/>
+    <PaginationComp :pagination="pagination" @page-change="getPosts"/>
 
   </div>
 </template> 
@@ -45,8 +45,8 @@ export default{
     }
   },
   methods: {
-    getPosts(){
-      axios.get('http://127.0.0.1:8000/api/posts')
+    getPosts(page =  1){
+      axios.get('http://127.0.0.1:8000/api/posts?page=' + page)
           .then((res) => {
             console.log(res.data);
 

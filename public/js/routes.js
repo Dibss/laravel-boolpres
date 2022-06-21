@@ -2027,14 +2027,46 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LoaderComp_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../LoaderComp.vue */ "./resources/js/components/LoaderComp.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
 //
 //
 //
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PostDetailPage'
+  name: 'PostDetailPage',
+  components: {
+    LoaderComp: _LoaderComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      isLoading: true,
+      post: []
+    };
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/posts/".concat(this.$route.params.id)).then(function (res) {
+        console.log(res.data); // const {data} = res.data.posts;
+
+        _this.post = res.data;
+      }).then(function () {
+        _this.isLoading = false;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getPost();
+    console.log(this.post);
+  }
 });
 
 /***/ }),
@@ -2100,7 +2132,8 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts').then(function (res) {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts?page=' + page).then(function (res) {
         console.log(res.data);
         var _res$data$posts = res.data.posts,
             data = _res$data$posts.data,
@@ -3329,44 +3362,100 @@ var render = function () {
       "ul",
       { staticClass: "pagination" },
       [
-        _vm._m(0),
+        _c(
+          "li",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.pagination.currentPage > 1,
+                expression: "pagination.currentPage > 1",
+              },
+            ],
+            staticClass: "page-item",
+            attrs: { role: "button" },
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { href: "#" },
+                on: {
+                  click: function ($event) {
+                    return _vm.$emit(
+                      "page-change",
+                      _vm.pagination.currentPage - 1
+                    )
+                  },
+                },
+              },
+              [_vm._v("Previous")]
+            ),
+          ]
+        ),
         _vm._v(" "),
         _vm._l(_vm.pagination.lastPage, function (page) {
-          return _c("li", { key: page.id, staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-              _vm._v(_vm._s(page)),
-            ]),
-          ])
+          return _c(
+            "li",
+            {
+              key: page.id,
+              staticClass: "page-item",
+              attrs: { role: "button" },
+              on: {
+                click: function ($event) {
+                  return _vm.$emit("page-change", page)
+                },
+              },
+            },
+            [
+              _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                _vm._v(_vm._s(page)),
+              ]),
+            ]
+          )
         }),
         _vm._v(" "),
-        _vm._m(1),
+        _c(
+          "li",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.pagination.lastPage > _vm.pagination.currentPage,
+                expression: "pagination.lastPage > pagination.currentPage",
+              },
+            ],
+            staticClass: "page-item",
+            attrs: { role: "button" },
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { href: "#" },
+                on: {
+                  click: function ($event) {
+                    return _vm.$emit(
+                      "page-change",
+                      _vm.pagination.currentPage + 1
+                    )
+                  },
+                },
+              },
+              [_vm._v("Next")]
+            ),
+          ]
+        ),
       ],
       2
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "page-item" }, [
-      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-        _vm._v("Previous"),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "page-item" }, [
-      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-        _vm._v("Next"),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -3481,16 +3570,17 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _vm.isLoading
+        ? _c("LoaderComp")
+        : _c("h1", [_vm._v("post detail page: " + _vm._s(_vm.post.title))]),
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("post dettail page")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -3578,7 +3668,10 @@ var render = function () {
           )
         : _c("p", [_vm._v("Non ci sono post")]),
       _vm._v(" "),
-      _c("PaginationComp", { attrs: { pagination: _vm.pagination } }),
+      _c("PaginationComp", {
+        attrs: { pagination: _vm.pagination },
+        on: { "page-change": _vm.getPosts },
+      }),
     ],
     1
   )
@@ -19489,7 +19582,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_ContactPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     name: 'contact'
   }, {
-    path: '/post/:id',
+    path: '/posts/:id',
     component: _components_pages_PostDetailPage_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'postDetail'
   }, {
