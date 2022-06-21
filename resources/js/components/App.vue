@@ -4,7 +4,8 @@
             <HeaderComp/>
         </header>
         <main>
-            <MainComp/>
+            <!-- <MainComp/> -->
+            <router-view></router-view>
         </main>
         <footer>
             <FooterComp/>
