@@ -2,7 +2,8 @@
   <div>
     <nav>
       <ul>
-        <li><a href="">Home</a></li>
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/contacts">Contacts</router-link></li>
       </ul>
     </nav>
   </div>

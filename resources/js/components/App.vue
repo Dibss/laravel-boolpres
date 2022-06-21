@@ -15,14 +15,12 @@
 
 <script>
 import HeaderComp from './partials/HeaderComp.vue';
-import MainComp from './partials/MainComp.vue';
 import FooterComp from './partials/FooterComp.vue';
 
 export default{
     name: "App",
     components: {
         HeaderComp,
-        MainComp,
         FooterComp,
     }
 }
