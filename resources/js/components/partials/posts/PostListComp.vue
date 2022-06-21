@@ -7,7 +7,10 @@
       <li v-for="post in posts" :key="post.id">
         <div class="card">
           <h2>{{post.title}}</h2>
-          <span>Category: {{post.category.label}}</span>
+          <span>Category: {{post.category.label}}</span> 
+          <div>
+            <button><router-link :to="{name: 'postDetail', params: {id: post.id}}">Details</router-link></button>
+          </div>
           <p>{{post.description}}</p>
           <div v-if="post.tags.length > 0">Tags: 
             <span v-for="tag in post.tags" :key="tag.id" :style="`background-color: ${tag.color}`">{{tag.label}}</span>
