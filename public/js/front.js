@@ -2228,6 +2228,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2322,7 +2330,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".card[data-v-435f1e8b] {\n  border: 2px solid #000;\n  padding: 1em;\n  margin: 1em 0;\n}\n.card div span[data-v-435f1e8b] {\n  margin: 0 0.3em;\n}", ""]);
+exports.push([module.i, ".card a[data-v-435f1e8b] {\n  color: #fff;\n}", ""]);
 
 // exports
 
@@ -4026,55 +4034,64 @@ var render = function () {
             "ul",
             _vm._l(_vm.posts, function (post) {
               return _c("li", { key: post.id }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("h2", [_vm._v(_vm._s(post.title))]),
-                  _vm._v(" "),
-                  _c("span", [
-                    _vm._v("Category: " + _vm._s(post.category.label)),
+                _c("div", { staticClass: "card text-center" }, [
+                  _c("div", { staticClass: "card-header font-weight-bold" }, [
+                    _vm._v("\n          " + _vm._s(post.title) + "\n        "),
                   ]),
                   _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "button",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            attrs: {
-                              to: {
-                                name: "postDetail",
-                                params: { slug: post.slug },
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("span", [
+                      _vm._v("Category: " + _vm._s(post.category.label)),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(_vm._s(post.description)),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "button",
+                        { staticClass: "btn btn-primary" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "postDetail",
+                                  params: { slug: post.slug },
+                                },
                               },
                             },
-                          },
-                          [_vm._v("Details")]
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(post.description))]),
-                  _vm._v(" "),
-                  post.tags.length > 0
-                    ? _c(
-                        "div",
-                        [
-                          _vm._v("Tags: \n          "),
-                          _vm._l(post.tags, function (tag) {
-                            return _c(
-                              "span",
-                              {
-                                key: tag.id,
-                                style: "background-color: " + tag.color,
-                              },
-                              [_vm._v(_vm._s(tag.label))]
-                            )
-                          }),
+                            [_vm._v("Details")]
+                          ),
                         ],
-                        2
-                      )
-                    : _c("div", [_vm._v("-")]),
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    post.tags.length > 0
+                      ? _c(
+                          "div",
+                          { staticClass: "my-3" },
+                          [
+                            _vm._v("Tags: \n            "),
+                            _vm._l(post.tags, function (tag) {
+                              return _c(
+                                "span",
+                                {
+                                  key: tag.id,
+                                  staticClass: "badge badge-pill",
+                                  style: "background-color: " + tag.color,
+                                },
+                                [_vm._v(_vm._s(tag.label))]
+                              )
+                            }),
+                          ],
+                          2
+                        )
+                      : _c("div", [_vm._v("-")]),
+                  ]),
                 ]),
               ])
             }),
